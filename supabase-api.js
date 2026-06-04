@@ -4,8 +4,8 @@
    
    วิธีใช้:
    1. เพิ่ม script ใน HTML ก่อน app.jsx:
-      <script src="https://lvizorfgyrqqvxxmlalr.supabase.co"></script>
-      <script src="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2aXpvcmZneXJxcXZ4eG1sYWxyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MTQwOTcsImV4cCI6MjA5NjA5MDA5N30.9IY71dr8vO3DRHuqfyFI-bBWbGUs66fAuOvisZettlc"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <script src="supabase-api.js"></script>
    
    2. กรอก URL และ ANON KEY จาก Supabase Dashboard → Settings → API
    
@@ -16,9 +16,9 @@
 // ─────────────────────────────────────────────
 //  1. CONFIG — แก้ 2 บรรทัดนี้
 // ─────────────────────────────────────────────
-const SUPABASE_URL  = 'https://lvizorfgyrqqvxxmlalr.supabase.co';   // ← เปลี่ยน
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2aXpvcmZneXJxcXZ4eG1sYWxyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MTQwOTcsImV4cCI6MjA5NjA5MDA5N30.9IY71dr8vO3DRHuqfyFI-bBWbGUs66fAuOvisZettlc';               // ← เปลี่ยน
-const STORAGE_BUCKET = 'student-photos';
+const SUPABASE_URL  = 'https://qlwkzpgdlvqlpxuidhze.supabase.co';   // ← เปลี่ยน
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFsd2t6cGdkbHZxbHB4dWlkaHplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTM0OTgsImV4cCI6MjA5NjEyOTQ5OH0.77X8ZA-b_6vfioX0GKqdkYdOKOMkek-KVc0OiNK_yZg';               // ← เปลี่ยน
+const STORAGE_BUCKET = 'PHOTO';
 
 // ─────────────────────────────────────────────
 //  2. INIT
