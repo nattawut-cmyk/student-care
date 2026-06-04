@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>คู่มือติดตั้งระบบดูแลช่วยเหลือนักเรียน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --blue:   #2c7ab6; --blue-d: #1b5483; --blue-l: #eef6fc;
+  --gold:   #f2c230; --gold-l: #fef9e3;
+  --ok:     #1ea672; --ok-l:   #e6f6ef;
+  --warn:   #e6a417; --warn-l: #fcf3da;
+  --risk:   #ea7b17; --risk-l: #fdeedd;
+  --red:    #e23b3b; --red-l:  #fde7e7;
+  --ink:    #16202b; --ink2:   #475467; --ink3: #7c8aa0;
+  --line:   #e2e9f1; --bg:     #f6f9fc; --white: #fff;
+  --mono:   'IBM Plex Mono', ui-monospace, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body { font-family: 'IBM Plex Sans Thai', system-ui, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+
+/* ── PAGE ── */
+.page { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* ── COVER ── */
+.cover { background: linear-gradient(135deg,var(--blue-d),var(--blue)); color:#fff; padding:56px 52px; border-radius:20px; margin:32px 0 40px; position:relative; overflow:hidden; }
+.cover::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at 80% -20%,rgba(242,194,48,.25),transparent 55%); pointer-events:none; }
+.cover .badge { display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; background:rgba(255,255,255,.15); padding:5px 12px; border-radius:99px; margin-bottom:20px; }
+.cover h1 { font-size:36px; font-weight:700; line-height:1.15; letter-spacing:-.5px; max-width:540px; }
+.cover p { font-size:16px; opacity:.88; margin-top:14px; font-weight:300; max-width:520px; }
+.cover .meta { margin-top:32px; display:flex; gap:32px; flex-wrap:wrap; }
+.cover .meta-item { font-size:13px; opacity:.8; }
+.cover .meta-item b { display:block; font-size:15px; opacity:1; font-weight:600; }
+.cover img.logo { position:absolute; right:52px; top:50%; transform:translateY(-50%); width:120px; height:120px; opacity:.25; filter:brightness(10); }
+
+/* ── SECTION ── */
+.sec { margin:40px 0 0; }
+.sec-header { display:flex; align-items:center; gap:14px; margin-bottom:22px; padding-bottom:14px; border-bottom:2px solid var(--blue); }
+.sec-num { width:38px; height:38px; border-radius:50%; background:var(--blue); color:#fff; display:grid; place-items:center; font-size:16px; font-weight:700; flex-shrink:0; }
+.sec-header h2 { font-size:22px; font-weight:600; }
+.sec-header .sub { font-size:13px; color:var(--ink3); }
+
+/* ── STEP ── */
+.step { display:flex; gap:16px; margin-bottom:20px; }
+.step-num { width:30px; height:30px; border-radius:50%; background:var(--blue-l); color:var(--blue-d); display:grid; place-items:center; font-size:13px; font-weight:700; flex-shrink:0; margin-top:2px; }
+.step-body { flex:1; }
+.step-body h3 { font-size:16px; font-weight:600; margin-bottom:6px; }
+.step-body p { font-size:14.5px; color:var(--ink2); margin-bottom:8px; }
+
+/* ── CODE ── */
+pre, code { font-family:var(--mono); }
+pre { background:#16202b; color:#a9d4ff; padding:18px 20px; border-radius:12px; font-size:13px; line-height:1.7; overflow-x:auto; margin:10px 0; tab-size:2; white-space:pre-wrap; word-break:break-all; }
+pre .cm  { color:#6c8b6c; } /* comment */
+pre .kw  { color:#f2c230; } /* keyword */
+pre .st  { color:#98d89e; } /* string */
+pre .fn  { color:#79b6e0; } /* function */
+pre .nm  { color:#ffb347; } /* number */
+code { background:var(--blue-l); color:var(--blue-d); padding:2px 7px; border-radius:5px; font-size:13px; }
+
+/* ── CALLOUT ── */
+.callout { display:flex; gap:13px; padding:14px 16px; border-radius:12px; margin:12px 0; font-size:14px; }
+.callout.info  { background:var(--blue-l); border-left:4px solid var(--blue); }
+.callout.ok    { background:var(--ok-l);   border-left:4px solid var(--ok); }
+.callout.warn  { background:var(--warn-l); border-left:4px solid var(--warn); }
+.callout.risk  { background:var(--red-l);  border-left:4px solid var(--red); }
+.callout .icon { font-size:18px; flex-shrink:0; margin-top:1px; }
+.callout p { color:var(--ink2); }
+.callout b { color:var(--ink); }
+
+/* ── TABLE ── */
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:14px; }
+th { background:var(--blue); color:#fff; text-align:left; padding:10px 14px; font-weight:600; font-size:13px; }
+td { padding:10px 14px; border-bottom:1px solid var(--line); vertical-align:top; }
+tr:last-child td { border-bottom:none; }
+tr:nth-child(even) td { background:var(--bg); }
+
+/* ── FILE TREE ── */
+.tree { background:#1a2332; color:#cce3f5; padding:18px 20px; border-radius:12px; font-family:var(--mono); font-size:13px; line-height:1.9; margin:10px 0; }
+.tree .dir  { color:var(--gold); font-weight:600; }
+.tree .file { color:#a9d4ff; }
+.tree .note { color:#6c8b6c; }
+
+/* ── BADGE ── */
+.tag { display:inline-block; font-size:12px; font-weight:600; padding:3px 10px; border-radius:99px; }
+.tag.free  { background:var(--ok-l);   color:var(--ok);   }
+.tag.paid  { background:var(--warn-l); color:#a87b06;     }
+.tag.hard  { background:var(--red-l);  color:var(--red);  }
+.tag.easy  { background:var(--blue-l); color:var(--blue); }
+
+/* ── CHECKLIST ── */
+.checklist { list-style:none; }
+.checklist li { display:flex; gap:10px; padding:8px 0; border-bottom:1px dashed var(--line); font-size:14.5px; }
+.checklist li:last-child { border:none; }
+.checklist li::before { content:'☐'; font-size:18px; flex-shrink:0; color:var(--blue); }
+.checklist li.done::before { content:'☑'; color:var(--ok); }
+
+/* ── DIAGRAM ── */
+.diagram { display:flex; align-items:center; gap:0; flex-wrap:wrap; margin:16px 0; }
+.dbox { background:var(--white); border:1.5px solid var(--line); border-radius:10px; padding:12px 16px; text-align:center; min-width:130px; }
+.dbox .dt { font-size:11px; color:var(--ink3); text-transform:uppercase; letter-spacing:.05em; }
+.dbox .dv { font-size:14px; font-weight:600; margin-top:3px; }
+.darr { font-size:20px; color:var(--ink3); padding:0 6px; }
+
+/* ── PRINT ── */
+@media print {
+  body { background:#fff; font-size:13px; }
+  .page { max-width:100%; padding:0 20px; }
+  .cover { border-radius:12px; padding:36px 40px; }
+  pre { font-size:11.5px; }
+  .no-print { display:none; }
+  .sec { page-break-inside:avoid; }
+  pre { page-break-inside:avoid; }
+}
+
+/* ── NAV (screen only) ── */
+.toc { position:sticky; top:20px; background:var(--white); border:1.5px solid var(--line); border-radius:14px; padding:18px; width:220px; float:right; margin:0 0 24px 28px; font-size:13.5px; no-print:none; }
+.toc h4 { font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink3); margin-bottom:10px; }
+.toc a { display:block; color:var(--ink2); padding:4px 0; text-decoration:none; }
+.toc a:hover { color:var(--blue); }
+.print-btn { display:inline-flex; align-items:center; gap:8px; background:var(--blue); color:#fff; border:none; padding:10px 20px; border-radius:10px; font-family:inherit; font-size:14px; font-weight:600; cursor:pointer; margin-bottom:24px; }
+.print-btn:hover { background:var(--blue-d); }
+@media print { .toc, .print-btn { display:none; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <button class="print-btn no-print" onclick="window.print()">🖨️ พิมพ์ / บันทึก PDF</button>
+
+  <!-- COVER -->
+  <div class="cover">
+    <img class="logo" src="assets/logo.png" alt="" onerror="this.style.display='none'"/>
+    <div class="badge">📋 คู่มือทางเทคนิค</div>
+    <h1>คู่มือติดตั้งและเชื่อมต่อฐานข้อมูล</h1>
+    <p>ระบบสารสนเทศเพื่อการดูแลช่วยเหลือนักเรียน โรงเรียนปากกรานพิทยา สังกัด สพม.พระนครศรีอยุธยา</p>
+    <div class="meta">
+      <div class="meta-item"><b>เวอร์ชัน</b>1.0 · มิถุนายน 2568</div>
+      <div class="meta-item"><b>ระดับ</b>IT โรงเรียน / ผู้ดูแลระบบ</div>
+      <div class="meta-item"><b>เวลา</b>ประมาณ 2–4 ชั่วโมง (แนวทางที่ 1)</div>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc no-print">
+    <h4>สารบัญ</h4>
+    <a href="#overview">ภาพรวม</a>
+    <a href="#prereq">สิ่งที่ต้องมี</a>
+    <a href="#supabase">แนวทางที่ 1 · Supabase</a>
+    <a href="#server">แนวทางที่ 2 · Server ภายใน</a>
+    <a href="#integrate">เชื่อมต่อระบบ</a>
+    <a href="#deploy">Deploy บน Vercel</a>
+    <a href="#security">ความปลอดภัย</a>
+    <a href="#troubleshoot">แก้ปัญหาที่พบบ่อย</a>
+  </nav>
+
+  <!-- ─── OVERVIEW ─── -->
+  <div class="sec" id="overview">
+    <div class="sec-header">
+      <div class="sec-num">0</div>
+      <div><h2>ภาพรวมระบบ</h2><div class="sub">Architecture และ Stack ที่ใช้</div></div>
+    </div>
+
+    <div class="diagram">
+      <div class="dbox"><div class="dt">Browser/มือถือ</div><div class="dv">🌐 HTML App</div></div>
+      <div class="darr">→</div>
+      <div class="dbox" style="border-color:var(--blue);background:var(--blue-l)"><div class="dt">Backend/DB</div><div class="dv">🗄️ Supabase</div></div>
+      <div class="darr">→</div>
+      <div class="dbox"><div class="dt">Storage</div><div class="dv">🖼️ รูปภาพ</div></div>
+    </div>
+
+    <table>
+      <tr><th>ส่วนประกอบ</th><th>เทคโนโลยี</th><th>หน้าที่</th></tr>
+      <tr><td><b>Frontend</b></td><td>HTML + React (Babel)</td><td>หน้าจอที่ครูและผู้บริหารใช้งาน</td></tr>
+      <tr><td><b>Database</b></td><td>PostgreSQL (Supabase)</td><td>เก็บข้อมูลนักเรียน การเยี่ยมบ้าน เคส</td></tr>
+      <tr><td><b>Auth</b></td><td>Supabase Auth</td><td>ล็อกอิน/สมัคร/จัดการสิทธิ์</td></tr>
+      <tr><td><b>Storage</b></td><td>Supabase Storage</td><td>รูปภาพนักเรียน รูปบ้าน ลายเซ็น</td></tr>
+      <tr><td><b>Hosting</b></td><td>Vercel / Netlify</td><td>ให้บริการไฟล์ HTML ผ่านอินเทอร์เน็ต</td></tr>
+    </table>
+
+    <div class="callout ok">
+      <div class="icon">💰</div>
+      <div><b>ค่าใช้จ่าย:</b> ฟรีทั้งหมดสำหรับขนาดโรงเรียน — Supabase Free Tier รองรับ 500MB + 50,000 MAU + 1GB Storage ซึ่งเกินพอสำหรับโรงเรียน 1 แห่ง</div>
+    </div>
+  </div>
+
+  <!-- ─── PREREQ ─── -->
+  <div class="sec" id="prereq">
+    <div class="sec-header">
+      <div class="sec-num">1</div>
+      <div><h2>สิ่งที่ต้องมีก่อนเริ่ม</h2></div>
+    </div>
+    <ul class="checklist">
+      <li>อีเมลสำหรับสมัคร Supabase (แนะนำใช้อีเมลโรงเรียน)</li>
+      <li>Browser ทันสมัย (Chrome / Edge)</li>
+      <li>ไฟล์ระบบทั้งหมด (ครบอยู่แล้วในโปรเจกต์นี้)</li>
+      <li>อินเทอร์เน็ต (ระหว่างตั้งค่า Supabase)</li>
+      <li>บัญชี GitHub (ถ้าต้องการ deploy บน Vercel)</li>
+    </ul>
+  </div>
+
+  <!-- ─── SUPABASE ─── -->
+  <div class="sec" id="supabase">
+    <div class="sec-header">
+      <div class="sec-num">2</div>
+      <div><h2>แนวทางที่ 1 · Supabase <span class="tag free">แนะนำ · ฟรี</span></h2></div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>สมัคร Supabase และสร้าง Project</h3>
+        <p>ไปที่ <code>supabase.com</code> → กด <b>Start your project</b> → สมัครด้วย GitHub หรืออีเมล</p>
+        <p>กด <b>New Project</b> ตั้งค่าดังนี้:</p>
+        <table>
+          <tr><th>ช่อง</th><th>ค่าที่แนะนำ</th></tr>
+          <tr><td>Name</td><td>pakkran-student-care</td></tr>
+          <tr><td>Database Password</td><td>ตั้งรหัสผ่านที่แข็งแรง <b>เก็บไว้ให้ดี!</b></td></tr>
+          <tr><td>Region</td><td>Southeast Asia (Singapore)</td></tr>
+        </table>
+        <p>รอ ~2 นาที จนสถานะเป็น <code>Active</code></p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>สร้างตารางฐานข้อมูล (SQL Schema)</h3>
+        <p>ไปที่ <b>SQL Editor</b> → <b>New Query</b> → วางโค้ดด้านล่างทั้งหมด → กด <b>Run</b></p>
+<pre><span class="cm">-- ===== ระบบดูแลช่วยเหลือนักเรียน · Schema v1.0 =====</span>
+
+<span class="cm">-- ตารางโปรไฟล์ผู้ใช้ (เชื่อมกับ Supabase Auth)</span>
+<span class="kw">CREATE TABLE</span> user_profiles (
+  id        uuid <span class="kw">PRIMARY KEY REFERENCES</span> auth.users(id) <span class="kw">ON DELETE CASCADE</span>,
+  name      text <span class="kw">NOT NULL</span>,
+  username  text <span class="kw">UNIQUE NOT NULL</span>,
+  email     text <span class="kw">UNIQUE NOT NULL</span>,
+  role      text <span class="kw">NOT NULL DEFAULT</span> <span class="st">'teacher'</span>,
+  classroom text,
+  initials  text,
+  status    text <span class="kw">NOT NULL DEFAULT</span> <span class="st">'pending'</span>,
+  created_at timestamptz <span class="kw">DEFAULT now</span>()
+);
+
+<span class="cm">-- ตารางนักเรียน</span>
+<span class="kw">CREATE TABLE</span> students (
+  id           uuid <span class="kw">PRIMARY KEY DEFAULT gen_random_uuid</span>(),
+  student_code text <span class="kw">UNIQUE</span>,
+  citizen_id   text,
+  prefix       text,
+  first_name   text <span class="kw">NOT NULL</span>,
+  last_name    text <span class="kw">NOT NULL</span>,
+  nick_name    text,
+  classroom    text,
+  grade        text,
+  room_no      int,
+  gender       text,
+  advisor_id   uuid <span class="kw">REFERENCES</span> user_profiles(id),
+  created_at   timestamptz <span class="kw">DEFAULT now</span>()
+);
+
+<span class="cm">-- ผู้ปกครอง</span>
+<span class="kw">CREATE TABLE</span> guardians (
+  id               uuid <span class="kw">PRIMARY KEY DEFAULT gen_random_uuid</span>(),
+  student_id       uuid <span class="kw">REFERENCES</span> students(id) <span class="kw">ON DELETE CASCADE</span>,
+  name             text,
+  relation         text,
+  occupation       text,
+  education        text,
+  phone            text,
+  income_per_head  int <span class="kw">DEFAULT</span> <span class="nm">0</span>,
+  members          int <span class="kw">DEFAULT</span> <span class="nm">1</span>,
+  house_type       text,
+  econ_status      text,
+  live_with        text
+);
+
+<span class="cm">-- การเยี่ยมบ้าน</span>
+<span class="kw">CREATE TABLE</span> home_visits (
+  id             uuid <span class="kw">PRIMARY KEY DEFAULT gen_random_uuid</span>(),
+  student_id     uuid <span class="kw">REFERENCES</span> students(id) <span class="kw">ON DELETE CASCADE</span>,
+  teacher_id     uuid <span class="kw">REFERENCES</span> user_profiles(id),
+  visit_date     date <span class="kw">DEFAULT CURRENT_DATE</span>,
+  risk_factors   jsonb <span class="kw">DEFAULT</span> <span class="st">'[]'</span>,
+  risk_score     int <span class="kw">DEFAULT</span> <span class="nm">0</span>,
+  risk_level     text <span class="kw">DEFAULT</span> <span class="st">'ok'</span>,
+  summary        text,
+  latitude       float,
+  longitude      float,
+  house_type     text,
+  income_per_head int,
+  family_members  int,
+  complete       boolean <span class="kw">DEFAULT false</span>,
+  created_at     timestamptz <span class="kw">DEFAULT now</span>()
+);
+
+<span class="cm">-- รูปภาพ</span>
+<span class="kw">CREATE TABLE</span> visit_photos (
+  id           uuid <span class="kw">PRIMARY KEY DEFAULT gen_random_uuid</span>(),
+  student_id   uuid <span class="kw">REFERENCES</span> students(id) <span class="kw">ON DELETE CASCADE</span>,
+  visit_id     uuid <span class="kw">REFERENCES</span> home_visits(id),
+  photo_type   text, <span class="cm">-- avatar / home_ext / home_int / student_guardian</span>
+  storage_path text,
+  created_at   timestamptz <span class="kw">DEFAULT now</span>()
+);
+
+<span class="cm">-- เคสช่วยเหลือ</span>
+<span class="kw">CREATE TABLE</span> student_cases (
+  id         uuid <span class="kw">PRIMARY KEY DEFAULT gen_random_uuid</span>(),
+  student_id uuid <span class="kw">REFERENCES</span> students(id),
+  title      text,
+  case_type  text,
+  severity   text,
+  status     text <span class="kw">DEFAULT</span> <span class="st">'new'</span>,
+  problems   jsonb <span class="kw">DEFAULT</span> <span class="st">'[]'</span>,
+  plan       jsonb <span class="kw">DEFAULT</span> <span class="st">'[]'</span>,
+  owner_id   uuid <span class="kw">REFERENCES</span> user_profiles(id),
+  opened_at  timestamptz <span class="kw">DEFAULT now</span>()
+);
+
+<span class="cm">-- Index ช่วยความเร็ว</span>
+<span class="kw">CREATE INDEX ON</span> students(classroom);
+<span class="kw">CREATE INDEX ON</span> home_visits(student_id);
+<span class="kw">CREATE INDEX ON</span> home_visits(teacher_id);
+<span class="kw">CREATE INDEX ON</span> visit_photos(student_id);
+</pre>
+        <div class="callout ok"><div class="icon">✅</div><div>ถ้ารันสำเร็จจะเห็นข้อความ <code>Success. No rows returned</code></div></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>ตั้งค่า Row Level Security (RLS)</h3>
+        <p>เปิด SQL Editor → New Query → รัน script นี้เพื่อกำหนดสิทธิ์การเข้าถึงข้อมูล:</p>
+<pre><span class="cm">-- เปิด RLS ทุกตาราง</span>
+<span class="kw">ALTER TABLE</span> students        <span class="kw">ENABLE ROW LEVEL SECURITY</span>;
+<span class="kw">ALTER TABLE</span> guardians       <span class="kw">ENABLE ROW LEVEL SECURITY</span>;
+<span class="kw">ALTER TABLE</span> home_visits     <span class="kw">ENABLE ROW LEVEL SECURITY</span>;
+<span class="kw">ALTER TABLE</span> visit_photos    <span class="kw">ENABLE ROW LEVEL SECURITY</span>;
+<span class="kw">ALTER TABLE</span> student_cases   <span class="kw">ENABLE ROW LEVEL SECURITY</span>;
+<span class="kw">ALTER TABLE</span> user_profiles   <span class="kw">ENABLE ROW LEVEL SECURITY</span>;
+
+<span class="cm">-- admin/director เห็นทุกอย่าง</span>
+<span class="kw">CREATE OR REPLACE FUNCTION</span> <span class="fn">is_admin_or_director</span>()
+<span class="kw">RETURNS</span> bool <span class="kw">AS</span> $$
+  <span class="kw">SELECT</span> role <span class="kw">IN</span> (<span class="st">'admin'</span>,<span class="st">'director'</span>)
+  <span class="kw">FROM</span> user_profiles <span class="kw">WHERE</span> id = auth.uid()
+$$ <span class="kw">LANGUAGE</span> sql STABLE;
+
+<span class="cm">-- นักเรียน: ครูเห็นห้องตัวเอง, admin/director เห็นทุกห้อง</span>
+<span class="kw">CREATE POLICY</span> students_read <span class="kw">ON</span> students <span class="kw">FOR SELECT</span>
+  <span class="kw">USING</span> (
+    <span class="fn">is_admin_or_director</span>() <span class="kw">OR</span>
+    classroom = (<span class="kw">SELECT</span> classroom <span class="kw">FROM</span> user_profiles <span class="kw">WHERE</span> id = auth.uid())
+  );
+
+<span class="kw">CREATE POLICY</span> students_write <span class="kw">ON</span> students <span class="kw">FOR INSERT</span>
+  <span class="kw">WITH CHECK</span> (
+    (<span class="kw">SELECT</span> role <span class="kw">FROM</span> user_profiles <span class="kw">WHERE</span> id = auth.uid()) = <span class="st">'teacher'</span>
+  );
+
+<span class="cm">-- การเยี่ยมบ้าน: ครูแก้ไขได้เฉพาะที่ตัวเองสร้าง</span>
+<span class="kw">CREATE POLICY</span> visits_read  <span class="kw">ON</span> home_visits <span class="kw">FOR SELECT USING</span> (<span class="kw">true</span>);
+<span class="kw">CREATE POLICY</span> visits_write <span class="kw">ON</span> home_visits <span class="kw">FOR INSERT</span>
+  <span class="kw">WITH CHECK</span> (teacher_id = auth.uid());
+
+<span class="cm">-- user_profiles: อ่านได้ทุกคน, แก้ไขได้เฉพาะ admin</span>
+<span class="kw">CREATE POLICY</span> profiles_read <span class="kw">ON</span> user_profiles <span class="kw">FOR SELECT USING</span> (<span class="kw">true</span>);
+<span class="kw">CREATE POLICY</span> profiles_write <span class="kw">ON</span> user_profiles <span class="kw">FOR UPDATE</span>
+  <span class="kw">USING</span> (<span class="fn">is_admin_or_director</span>() <span class="kw">OR</span> id = auth.uid());
+</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>สร้าง Storage Bucket สำหรับรูปภาพ</h3>
+        <p>ไปที่ <b>Storage</b> → <b>New Bucket</b></p>
+        <table>
+          <tr><th>ช่อง</th><th>ค่า</th></tr>
+          <tr><td>Name</td><td><code>student-photos</code></td></tr>
+          <tr><td>Public bucket</td><td>❌ ปิด (รูปภาพนักเรียนควรเป็น private)</td></tr>
+        </table>
+        <p style="margin-top:10px">จากนั้นไปที่ <b>Policies</b> ใน bucket → เพิ่ม policy:</p>
+<pre><span class="cm">-- ครูอัปโหลด/แก้ไขได้เฉพาะของตัวเอง</span>
+<span class="kw">CREATE POLICY</span> photos_upload <span class="kw">ON</span> storage.objects
+  <span class="kw">FOR INSERT WITH CHECK</span> (
+    bucket_id = <span class="st">'student-photos'</span> <span class="kw">AND</span> auth.role() = <span class="st">'authenticated'</span>
+  );
+<span class="kw">CREATE POLICY</span> photos_read <span class="kw">ON</span> storage.objects
+  <span class="kw">FOR SELECT USING</span> (
+    bucket_id = <span class="st">'student-photos'</span> <span class="kw">AND</span> auth.role() = <span class="st">'authenticated'</span>
+  );
+</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h3>ดึง API Key</h3>
+        <p>ไปที่ <b>Settings → API</b> คัดลอก 2 ค่า:</p>
+        <table>
+          <tr><th>ค่า</th><th>ตำแหน่ง</th><th>หมายเหตุ</th></tr>
+          <tr><td><code>Project URL</code></td><td>Project URL</td><td>เริ่มด้วย https://</td></tr>
+          <tr><td><code>anon/public key</code></td><td>Project API Keys → anon</td><td>ใช้ในไฟล์ HTML ได้ปลอดภัย</td></tr>
+        </table>
+        <div class="callout risk"><div class="icon">⚠️</div><div><b>อย่าใส่ service_role key ในไฟล์ HTML!</b> ค่านั้นมีสิทธิ์สูงมากและควรเก็บไว้บน server เท่านั้น</div></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h3>สร้าง Admin Account แรก</h3>
+        <p>ไปที่ <b>Authentication → Users → Add User</b></p>
+        <table>
+          <tr><th>ช่อง</th><th>ค่า</th></tr>
+          <tr><td>Email</td><td>admin@pakkran.ac.th</td></tr>
+          <tr><td>Password</td><td>ตั้งรหัสผ่านที่ต้องการ</td></tr>
+        </table>
+        <p style="margin-top:10px">แล้วรัน SQL เพื่อสร้าง profile และให้สิทธิ์ admin:</p>
+<pre><span class="cm">-- แทนที่ 'USER_ID_HERE' ด้วย UUID ที่เห็นในหน้า Authentication</span>
+<span class="kw">INSERT INTO</span> user_profiles (id, name, username, email, role, status, initials)
+<span class="kw">VALUES</span> (
+  <span class="st">'USER_ID_HERE'</span>,
+  <span class="st">'ผู้ดูแลระบบ'</span>,
+  <span class="st">'admin'</span>,
+  <span class="st">'admin@pakkran.ac.th'</span>,
+  <span class="st">'admin'</span>,
+  <span class="st">'approved'</span>,
+  <span class="st">'AD'</span>
+);
+</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── INTEGRATE ─── -->
+  <div class="sec" id="integrate">
+    <div class="sec-header">
+      <div class="sec-num">3</div>
+      <div><h2>เชื่อมต่อไฟล์ระบบ</h2></div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>โครงสร้างไฟล์ที่ต้องมี</h3>
+<div class="tree">
+<span class="dir">📁 โปรเจกต์/</span>
+├── <span class="file">ระบบดูแลช่วยเหลือนักเรียน.html</span>   <span class="note">← ไฟล์หลัก</span>
+├── <span class="file">supabase-api.js</span>                   <span class="note">← Integration layer (ใหม่)</span>
+├── <span class="file">data.js</span>                          <span class="note">← Mock data (fallback)</span>
+├── <span class="file">auth.js</span>                          <span class="note">← Local auth (ถูกแทนที่)</span>
+├── <span class="file">app.jsx</span>
+├── <span class="file">ui.jsx</span>
+├── <span class="file">store.jsx</span>
+├── <span class="file">screens_*.jsx</span>
+└── <span class="dir">📁 assets/</span>
+    └── <span class="file">logo.png</span>
+</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>แก้ไข supabase-api.js</h3>
+        <p>เปิดไฟล์ <code>supabase-api.js</code> แก้ไข 2 บรรทัดแรก:</p>
+<pre><span class="kw">const</span> SUPABASE_URL  = <span class="st">'https://abcdefghij.supabase.co'</span>;  <span class="cm">// ← วาง URL จาก Settings</span>
+<span class="kw">const</span> SUPABASE_ANON = <span class="st">'eyJhbGci...'</span>;                      <span class="cm">// ← วาง anon key</span>
+</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>เพิ่ม script ใน HTML</h3>
+        <p>เปิด <code>ระบบดูแลช่วยเหลือนักเรียน.html</code> หา <code>&lt;script src="data.js"&gt;</code> แล้วเพิ่มก่อนหน้า:</p>
+<pre><span class="cm">&lt;!-- เพิ่ม 2 บรรทัดนี้ก่อน data.js --&gt;</span>
+&lt;<span class="kw">script</span> src=<span class="st">"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"</span>&gt;&lt;/<span class="kw">script</span>&gt;
+&lt;<span class="kw">script</span> src=<span class="st">"supabase-api.js"</span>&gt;&lt;/<span class="kw">script</span>&gt;
+
+&lt;<span class="cm">!-- ไฟล์เดิมที่มีอยู่แล้ว --&gt;</span>
+&lt;<span class="kw">script</span> src=<span class="st">"data.js"</span>&gt;&lt;/<span class="kw">script</span>&gt;
+</pre>
+        <div class="callout info"><div class="icon">ℹ️</div><div>ระบบจะพยายามโหลดจาก Supabase ก่อน ถ้าล้มเหลว (เช่น ไม่มีอินเทอร์เน็ต) จะ fallback ไปใช้ mock data อัตโนมัติ</div></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>ทดสอบ</h3>
+        <p>เปิดไฟล์ใน Browser → เปิด Console (F12) → ควรเห็น:</p>
+<pre><span class="cm">✅ โหลดนักเรียนสำเร็จ: 0 คน</span></pre>
+        <p>ถ้าเห็น <code>✅</code> แสดงว่าเชื่อมต่อ Supabase สำเร็จแล้ว</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── DEPLOY ─── -->
+  <div class="sec" id="deploy">
+    <div class="sec-header">
+      <div class="sec-num">4</div>
+      <div><h2>Deploy บน Vercel <span class="tag free">ฟรี</span></h2><div class="sub">ให้ผู้ใช้เข้าผ่านอินเทอร์เน็ตได้จากทุกที่</div></div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>อัปโหลดไฟล์ขึ้น GitHub</h3>
+<pre><span class="cm"># ในเครื่อง (ต้องติดตั้ง Git)</span>
+git init
+git add .
+git commit -m <span class="st">"ระบบดูแลช่วยเหลือนักเรียน v1"</span>
+git remote add origin https://github.com/USERNAME/student-care.git
+git push -u origin main</pre>
+        <div class="callout warn"><div class="icon">⚠️</div><div>ก่อน push ให้ลบหรือ .gitignore ไฟล์ที่มี key ส่วนตัว (ถ้ามี) อย่า commit supabase service_role key</div></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Import บน Vercel</h3>
+        <p>ไปที่ <code>vercel.com</code> → <b>New Project</b> → เลือก GitHub repo → กด <b>Deploy</b></p>
+        <p>รอประมาณ 1 นาที จะได้ URL เช่น <code>student-care.vercel.app</code></p>
+        <div class="callout ok"><div class="icon">🎉</div><div>แค่นี้ก็ใช้งานได้จากมือถือและคอมพิวเตอร์ทุกเครื่องในโรงเรียนแล้ว!</div></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>เพิ่ม Domain ของโรงเรียน (ถ้ามี)</h3>
+        <p>Vercel Settings → Domains → เพิ่ม domain เช่น <code>student.pakkran.ac.th</code> แล้วตั้ง DNS ตามที่ Vercel แนะนำ</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SERVER ─── -->
+  <div class="sec" id="server">
+    <div class="sec-header">
+      <div class="sec-num">5</div>
+      <div><h2>แนวทางที่ 2 · Server ภายในโรงเรียน <span class="tag hard">ต้องการ IT</span></h2></div>
+    </div>
+
+    <div class="callout warn"><div class="icon">💡</div><div>แนวทางนี้เหมาะสำหรับโรงเรียนที่มีนโยบาย <b>ห้ามเก็บข้อมูลนักเรียนนอกองค์กร</b> หรือมีเครื่อง server พร้อมอยู่แล้ว</div></div>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>ติดตั้ง PostgreSQL + Node.js (Ubuntu 22.04)</h3>
+<pre>sudo apt update && sudo apt upgrade -y
+sudo apt install -y postgresql postgresql-contrib nodejs npm nginx
+
+<span class="cm"># สร้าง Database</span>
+sudo -u postgres createuser --superuser student_admin
+sudo -u postgres createdb student_care
+sudo -u postgres psql -c <span class="st">"ALTER USER student_admin PASSWORD 'YOUR_PASSWORD';"</span>
+
+<span class="cm"># รัน schema</span>
+psql -U student_admin -d student_care -f schema.sql</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>สร้าง API Server (Node.js)</h3>
+        <p>สร้างโฟลเดอร์ <code>server/</code> และติดตั้ง packages:</p>
+<pre>mkdir server && cd server
+npm init -y
+npm install express pg cors dotenv bcrypt jsonwebtoken multer</pre>
+        <p>สร้างไฟล์ <code>server/.env</code>:</p>
+<pre>DATABASE_URL=postgresql://student_admin:YOUR_PASSWORD@localhost/student_care
+JWT_SECRET=your_very_long_random_secret_key_here
+PORT=3000</pre>
+        <p>สร้างไฟล์ <code>server/index.js</code>:</p>
+<pre>require(<span class="st">'dotenv'</span>).config();
+<span class="kw">const</span> express = require(<span class="st">'express'</span>);
+<span class="kw">const</span> { Pool } = require(<span class="st">'pg'</span>);
+<span class="kw">const</span> cors = require(<span class="st">'cors'</span>);
+<span class="kw">const</span> jwt = require(<span class="st">'jsonwebtoken'</span>);
+<span class="kw">const</span> bcrypt = require(<span class="st">'bcrypt'</span>);
+
+<span class="kw">const</span> app = express();
+<span class="kw">const</span> pool = <span class="kw">new</span> Pool({ connectionString: process.env.DATABASE_URL });
+app.use(cors()); app.use(express.json());
+
+<span class="cm">// Auth middleware</span>
+<span class="kw">const</span> auth = (req,res,next) => {
+  <span class="kw">const</span> token = req.headers.authorization?.split(<span class="st">' '</span>)[<span class="nm">1</span>];
+  <span class="kw">if</span>(!token) <span class="kw">return</span> res.status(<span class="nm">401</span>).json({error:<span class="st">'Unauthorized'</span>});
+  <span class="kw">try</span> { req.user = jwt.verify(token, process.env.JWT_SECRET); next(); }
+  <span class="kw">catch</span>(e) { res.status(<span class="nm">401</span>).json({error:<span class="st">'Invalid token'</span>}); }
+};
+
+<span class="cm">// Login</span>
+app.post(<span class="st">'/api/auth/login'</span>, async (req,res) => {
+  <span class="kw">const</span> { username, password } = req.body;
+  <span class="kw">const</span> { rows } = await pool.query(
+    <span class="st">'SELECT * FROM user_profiles WHERE username=$1 OR email=$1'</span>, [username]);
+  <span class="kw">const</span> user = rows[<span class="nm">0</span>];
+  <span class="kw">if</span>(!user || !await bcrypt.compare(password, user.password_hash))
+    <span class="kw">return</span> res.status(<span class="nm">401</span>).json({error:<span class="st">'bad_password'</span>});
+  <span class="kw">if</span>(user.status !== <span class="st">'approved'</span>)
+    <span class="kw">return</span> res.status(<span class="nm">403</span>).json({error:user.status});
+  <span class="kw">const</span> token = jwt.sign({id:user.id,role:user.role}, process.env.JWT_SECRET, {expiresIn:<span class="st">'7d'</span>});
+  res.json({ token, user });
+});
+
+<span class="cm">// นักเรียน</span>
+app.get(<span class="st">'/api/students'</span>, auth, async (req,res) => {
+  <span class="kw">const</span> where = req.user.role === <span class="st">'teacher'</span>
+    ? <span class="st">'WHERE s.classroom = $1'</span> : <span class="st">''</span>;
+  <span class="kw">const</span> params = req.user.role === <span class="st">'teacher'</span>
+    ? [req.user.classroom] : [];
+  <span class="kw">const</span> { rows } = await pool.query(
+    <span class="st">`SELECT s.*, g.* FROM students s LEFT JOIN guardians g ON g.student_id=s.id ${where} ORDER BY s.classroom`</span>, params);
+  res.json(rows);
+});
+
+app.listen(process.env.PORT, () =>
+  console.log(<span class="st">`✅ API ready on port ${process.env.PORT}`</span>));
+</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>ตั้งค่า Nginx Reverse Proxy + HTTPS</h3>
+<pre><span class="cm"># ติดตั้ง Certbot (Let's Encrypt ฟรี)</span>
+sudo apt install certbot python3-certbot-nginx -y
+
+<span class="cm"># ตั้งค่า Nginx</span>
+sudo nano /etc/nginx/sites-available/student-care</pre>
+<pre>server {
+  server_name student.pakkran.ac.th;
+  location /api/ { proxy_pass http://localhost:3000; }
+  location / { root /var/www/student-care; try_files $uri /index.html; }
+}
+</pre>
+<pre><span class="cm"># เปิด HTTPS</span>
+sudo certbot --nginx -d student.pakkran.ac.th
+
+<span class="cm"># Start server ตอน boot</span>
+npm install -g pm2
+pm2 start server/index.js --name student-api
+pm2 startup && pm2 save</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SECURITY ─── -->
+  <div class="sec" id="security">
+    <div class="sec-header">
+      <div class="sec-num">6</div>
+      <div><h2>ความปลอดภัยของข้อมูลนักเรียน</h2></div>
+    </div>
+    <div class="callout risk"><div class="icon">🔒</div><div><b>ข้อมูลนักเรียนเป็นข้อมูลส่วนบุคคลที่อ่อนไหว</b> ต้องปฏิบัติตาม พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล (PDPA) 2562</div></div>
+    <table>
+      <tr><th>มาตรการ</th><th>วิธีดำเนินการ</th></tr>
+      <tr><td>HTTPS เท่านั้น</td><td>ใช้ Vercel/Certbot ซึ่งมี HTTPS อัตโนมัติ</td></tr>
+      <tr><td>RLS</td><td>ครูเห็นเฉพาะห้องตัวเอง ตาม policy ที่ตั้งไว้</td></tr>
+      <tr><td>Backup รายวัน</td><td>Supabase: Settings → Database → Backups (อัตโนมัติ 7 วัน)</td></tr>
+      <tr><td>รหัสผ่าน</td><td>ต้องยาวอย่างน้อย 8 ตัว เก็บเป็น bcrypt hash</td></tr>
+      <tr><td>Session</td><td>Token หมดอายุ 7 วัน ต้อง login ใหม่</td></tr>
+      <tr><td>ล็อกการเข้าถึง</td><td>Supabase Logs → API Logs ดูได้ real-time</td></tr>
+    </table>
+  </div>
+
+  <!-- ─── TROUBLESHOOT ─── -->
+  <div class="sec" id="troubleshoot">
+    <div class="sec-header">
+      <div class="sec-num">7</div>
+      <div><h2>ปัญหาที่พบบ่อยและวิธีแก้</h2></div>
+    </div>
+    <table>
+      <tr><th>อาการ</th><th>สาเหตุ</th><th>วิธีแก้</th></tr>
+      <tr><td>เข้าระบบไม่ได้ "not_found"</td><td>ยังไม่ได้สร้าง user_profile</td><td>รัน SQL INSERT profile ในข้อ 2.6</td></tr>
+      <tr><td>Console: "Failed to fetch"</td><td>URL/Key ผิด หรือ CORS</td><td>ตรวจ SUPABASE_URL/ANON ใน supabase-api.js</td></tr>
+      <tr><td>รูปภาพไม่แสดง</td><td>Bucket policy ยังไม่ได้ตั้ง</td><td>รัน SQL ใน Storage policies ข้อ 2.4</td></tr>
+      <tr><td>ข้อมูลนักเรียนไม่แสดง</td><td>RLS block</td><td>ตรวจว่า classroom ใน user_profile ตรงกับ students.classroom</td></tr>
+      <tr><td>Deploy Vercel ไม่ขึ้น</td><td>ไม่มี index.html ที่ root</td><td>ตรวจว่าไฟล์อยู่ที่ root ไม่ใช่ใน subfolder</td></tr>
+      <tr><td>หน้าจอขาว</td><td>JavaScript error</td><td>กด F12 → Console → ดู error แดง แจ้ง IT</td></tr>
+    </table>
+
+    <div class="callout info" style="margin-top:24px">
+      <div class="icon">📞</div>
+      <div>
+        <b>ขอความช่วยเหลือ:</b><br/>
+        • Supabase Docs: <code>supabase.com/docs</code><br/>
+        • Supabase Discord: <code>discord.supabase.com</code><br/>
+        • สพม.พระนครศรีอยุธยา ศูนย์ ICT
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <div style="margin-top:56px;padding-top:24px;border-top:1px solid var(--line);text-align:center;color:var(--ink3);font-size:13px;">
+    คู่มือนี้จัดทำสำหรับ <b>โรงเรียนปากกรานพิทยา</b> · สพม.พระนครศรีอยุธยา · เวอร์ชัน 1.0 · มิถุนายน 2568<br/>
+    ระบบสารสนเทศเพื่อการดูแลช่วยเหลือนักเรียน
+  </div>
+</div>
+</body>
+</html>
