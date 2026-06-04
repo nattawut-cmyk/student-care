@@ -16,7 +16,7 @@
 // ─────────────────────────────────────────────
 //  1. CONFIG — แก้ 2 บรรทัดนี้
 // ─────────────────────────────────────────────
-const SUPABASE_URL  = 'https://qlwkzpgdlvqlpxuidhze.supabase.co';   // ← เปลี่ยน
+const SUPABASE_URL  = 'https://qlwkzpgdlvqlpxuidhze.supabase.co/rest/v1/';   // ← เปลี่ยน
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFsd2t6cGdkbHZxbHB4dWlkaHplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTM0OTgsImV4cCI6MjA5NjEyOTQ5OH0.77X8ZA-b_6vfioX0GKqdkYdOKOMkek-KVc0OiNK_yZg';               // ← เปลี่ยน
 const STORAGE_BUCKET = 'PHOTO';
 
